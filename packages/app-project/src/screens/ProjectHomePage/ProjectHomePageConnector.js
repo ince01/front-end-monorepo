@@ -1,4 +1,5 @@
 import { observer, MobXProviderContext } from 'mobx-react'
+import { useRouter } from 'next/router'
 import { arrayOf, bool, shape, string } from 'prop-types'
 import React, { useContext } from 'react'
 
@@ -20,6 +21,13 @@ function ProjectHomePageConnector({
   workflows = []
 }) {
   const { inBeta } = useStoreContext(stores)
+  const router = useRouter()
+
+  // If the page is not yet generated, this will be displayed
+  // initially until getStaticProps() finishes running
+  if (router.isFallback) {
+    return <div>Loading...</div>
+  }
   return <ProjectHomePage inBeta={inBeta} workflows={workflows} />
 }
 

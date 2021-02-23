@@ -46,6 +46,9 @@ export default async function getDefaultPageProps({ params, query, req, res }) {
 }
 
 function generateHostUrl(headers, connection) {
-  const protocol = connection.encrypted ? 'https' : 'http'
-  return `${protocol}://${headers.host}`
+  if (headers && connection) {
+    const protocol = connection.encrypted ? 'https' : 'http'
+    return `${protocol}://${headers.host}`
+  }
+  return ''
 }
