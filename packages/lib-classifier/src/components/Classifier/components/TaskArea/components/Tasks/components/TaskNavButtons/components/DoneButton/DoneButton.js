@@ -1,6 +1,5 @@
-import { withThemeContext } from '@zooniverse/react-components'
+import { PrimaryButton, withThemeContext } from '@zooniverse/react-components'
 import counterpart from 'counterpart'
-import { Button, Text } from 'grommet'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -9,23 +8,19 @@ import theme from './theme'
 
 counterpart.registerTranslations('en', en)
 
-const Label = (
-  <Text size='medium'>
-    {counterpart('DoneButton.done')}
-  </Text>
-)
-
 // TODO add back gold standard and demo buttons using grommet Button icon prop
 // {props.demoMode && <i className="fa fa-trash fa-fw" />}
 // {props.goldStandardMode && <i className="fa fa-star fa-fw" />}
 function DoneButton (props) {
   if (!props.completed) {
     return (
-      <Button
+      <PrimaryButton
+        color='green'
         disabled={props.disabled}
-        label={Label}
+        fill
+        label={counterpart('DoneButton.done')}
         onClick={props.onClick}
-        type='submit'
+        style={{ textTransform: 'capitalize' }}
       />
     )
   }
